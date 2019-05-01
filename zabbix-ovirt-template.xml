@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-04-18T06:34:01Z</date>
+    <date>2019-05-01T10:06:21Z</date>
     <groups>
         <group>
             <name>Ovirt Hypervisors</name>
@@ -75,7 +75,7 @@
                     <host_prototypes>
                         <host_prototype>
                             <host>{#HOST_ID}</host>
-                            <name>{#HOST_NAME}</name>
+                            <name>ovirt-host-{#HOST_NAME}</name>
                             <status>0</status>
                             <group_links>
                                 <group_link>
@@ -148,7 +148,7 @@
                     <host_prototypes>
                         <host_prototype>
                             <host>{#STORAGEDOMAIN_ID}</host>
-                            <name>{#STORAGEDOMAIN_NAME}</name>
+                            <name>ovirt-sd-{#STORAGEDOMAIN_NAME}</name>
                             <status>0</status>
                             <group_links>
                                 <group_link>
@@ -221,7 +221,7 @@
                     <host_prototypes>
                         <host_prototype>
                             <host>{#VM_ID}</host>
-                            <name>{#VM_NAME}</name>
+                            <name>ovirt-vm-{#VM_NAME}</name>
                             <status>0</status>
                             <group_links>
                                 <group_link>
@@ -3036,6 +3036,65 @@
             </applications>
             <items>
                 <item>
+                    <name>Available %</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>ovirt.storagedomain.data[available-percent]</key>
+                    <delay>5m</delay>
+                    <history>90d</history>
+                    <trends>365d</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params>100 * last(&quot;ovirt.storagedomain.data[available]&quot;) / last(&quot;ovirt.storagedomain.data[committed]&quot;)</params>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>StorageDomain</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
+                </item>
+                <item>
                     <name>Available</name>
                     <type>18</type>
                     <snmp_community/>
@@ -4261,7 +4320,7 @@
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units>B</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -4327,7 +4386,7 @@
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units>B</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -4393,7 +4452,7 @@
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units>B</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -4459,7 +4518,7 @@
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units>B</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -4525,7 +4584,7 @@
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units>B</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -4578,6 +4637,65 @@
                     <master_item>
                         <key>ovirt.vm.stat[{HOST.HOST}]</key>
                     </master_item>
+                </item>
+                <item>
+                    <name>Memory (used) %</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>ovirt.vm.stat[memory.used-percent,{HOST.HOST}]</key>
+                    <delay>1m</delay>
+                    <history>90d</history>
+                    <trends>365d</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params>100 * last(&quot;ovirt.vm.stat[memory.used,{HOST.HOST}]&quot;) / last(&quot;ovirt.vm.stat[memory.installed,{HOST.HOST}]&quot;)</params>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Memory used (agent) %</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>oVirt VM Stat</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
                 </item>
                 <item>
                     <name>Migration</name>
@@ -6303,10 +6421,10 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 5</expression>
+            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=5</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Ovirt StorageDomain free &lt;= 5%</name>
+            <name>Ovirt StorageDomain Available &lt;= 5%</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -6319,10 +6437,10 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 10</expression>
+            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=10</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Ovirt StorageDomain free &lt;= 10%</name>
+            <name>Ovirt StorageDomain Available &lt;= 10%</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -6333,18 +6451,18 @@
             <manual_close>0</manual_close>
             <dependencies>
                 <dependency>
-                    <name>Ovirt StorageDomain free &lt;= 5%</name>
-                    <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 5</expression>
+                    <name>Ovirt StorageDomain Available &lt;= 5%</name>
+                    <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=5</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 15</expression>
+            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=15</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Ovirt StorageDomain free &lt;= 15%</name>
+            <name>Ovirt StorageDomain Available &lt;= 15%</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -6355,18 +6473,18 @@
             <manual_close>0</manual_close>
             <dependencies>
                 <dependency>
-                    <name>Ovirt StorageDomain free &lt;= 10%</name>
-                    <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 10</expression>
+                    <name>Ovirt StorageDomain Available &lt;= 10%</name>
+                    <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=10</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 20</expression>
+            <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=20</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Ovirt StorageDomain free &lt;= 20%</name>
+            <name>Ovirt StorageDomain Available &lt;= 20%</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -6377,8 +6495,8 @@
             <manual_close>0</manual_close>
             <dependencies>
                 <dependency>
-                    <name>Ovirt StorageDomain free &lt;= 15%</name>
-                    <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available].last()} &lt;= {Template oVirt  StorageDomain:ovirt.storagedomain.data[committed].last()} / 100 * 15</expression>
+                    <name>Ovirt StorageDomain Available &lt;= 15%</name>
+                    <expression>{Template oVirt  StorageDomain:ovirt.storagedomain.data[available-percent].last()}&lt;=15</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
@@ -6410,6 +6528,66 @@
             <url/>
             <status>0</status>
             <priority>1</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template oVirt  VM:ovirt.vm.stat[memory.used-percent,{HOST.HOST}].last()}&gt;=80</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>VM Memory used % &gt;= 80</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>VM Memory used % &gt;= 90</name>
+                    <expression>{Template oVirt  VM:ovirt.vm.stat[memory.used-percent,{HOST.HOST}].last()}&gt;=90</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template oVirt  VM:ovirt.vm.stat[memory.used-percent,{HOST.HOST}].last()}&gt;=90</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>VM Memory used % &gt;= 90</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>VM Memory used % &gt;= 95</name>
+                    <expression>{Template oVirt  VM:ovirt.vm.stat[memory.used-percent,{HOST.HOST}].last()}&gt;=95</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template oVirt  VM:ovirt.vm.stat[memory.used-percent,{HOST.HOST}].last()}&gt;=95</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>VM Memory used % &gt;= 95</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>5</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
